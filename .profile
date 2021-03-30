@@ -1,4 +1,5 @@
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # Add color to man pages
 export LESS_TERMCAP_mb=$'\e[1;32m'
