@@ -17,6 +17,6 @@ source ${ZDOTDIR:-$HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=black,bold"
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
-if [ command -v starship &> /dev/null ]; then
+if command -v starship &> /dev/null; then
     eval "$(starship init zsh)"
 fi
