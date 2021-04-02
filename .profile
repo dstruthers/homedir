@@ -11,7 +11,6 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 export GROFF_NO_SGR=1
 
-export GREP_OPTIONS="--color=auto"
 LS_OPTIONS="--color=auto"
 
 if command -v exa &> /dev/null; then
