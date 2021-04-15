@@ -10,4 +10,5 @@ set ruler
 set expandtab
 try
   colorscheme base16-materia
+  catch
 endtry
