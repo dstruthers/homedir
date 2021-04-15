@@ -8,4 +8,6 @@ set ignorecase
 set incsearch
 set ruler
 set expandtab
-colorscheme base16-materia
+try
+  colorscheme base16-materia
+endtry
