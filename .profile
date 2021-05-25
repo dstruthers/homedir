@@ -51,6 +51,7 @@ export LS_COLORS=$LS_COLORS:'di=0;35:'
 LS_OPTIONS="--color=auto"
 
 prepend_to_path_if_missing ~/.local/bin
+append_to_path_if_missing /sbin
 
 if command -v exa &> /dev/null; then
     export EXA_COLORS="uu=1;32:gu=1;32:sn=0;37:sb=0;37:da=1;30:ex=4;1;32"
