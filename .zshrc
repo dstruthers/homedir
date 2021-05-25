@@ -1,22 +1,45 @@
-# Lines configured by zsh-newuser-install
+source ~/.profile
+profile_aliases=`alias -L`
+
+ZFUNC=~/.zfunc
+fpath=($ZFUNC $fpath)
 HISTFILE=~/.histfile
-HISTSIZE=10000
+HISTSIZE=1000000
 SAVEHIST=1000000000
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/darren/.zshrc'
-
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
 
-source $HOME/.profile
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=black,bold"
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-source ${ZDOTDIR:-$HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=black,bold"
-export ZSH_AUTOSUGGEST_USE_ASYNC=1
+source ~/.antigen/bin/antigen.zsh
+antigen use oh-my-zsh
+[[ -n $commands[docker] ]] && antigen bundle docker
+[[ -n $commands[docker-compose] ]] && antigen bundle docker-compose
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
 
-if command -v starship &> /dev/null; then
-    eval "$(starship init zsh)"
+# Restore aliases that oh-my-zsh clobbered 
+eval $profile_aliases
+
+# Use completion provided by certain commands
+[[ -n $commands[kubeadm] ]] && source <(kubeadm completion zsh)
+[[ -n $commands[kubectl] ]] && source <(kubectl completion zsh)
+
+if [[ -n $commands[podman] ]]; then
+    [ -d $ZFUNC ] || mkdir -p $ZFUNC
+    podman completion zsh -f $ZFUNC/_podman
+    autoload -Uz _podman
 fi
+
+color_terms=(xterm-color xterm-256color screen screen-256color)
+for i in "${color_terms[@]}"; do
+    if [[ "$TERM" == "$i" ]]; then
+        PS1='[%F{green}%n%F{white}@%F{blue}%m%F{white}:%~]%(?.%F{green}.%F{red}<$?>)%#%F{reset} '
+    fi
+done
+
+[[ -n $commands[starship] ]] && eval "$(starship init zsh)"

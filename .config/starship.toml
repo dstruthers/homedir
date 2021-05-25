@@ -12,10 +12,12 @@ symbol = " "
 symbol = " "
 
 [directory]
+truncation_length = 10
 format = "in [$path]($style)[$read_only]($read_only_style) "
 read_only = " "
+truncation_symbol = ".../"
 
-[docker]
+[docker_context]
 symbol = " "
 
 [elixir]
@@ -25,16 +27,16 @@ symbol = " "
 symbol = " "
 
 [git_branch]
-symbol = " "
+#symbol = " "
 
 [golang]
 symbol = " "
 
-[haskell]
-symbol = " "
+#[haskell]
+#symbol = " "
 
 [hostname]
-style = "underline blue"
+style = "blue"
 format = "@[$hostname]($style) "
 ssh_only = false
 
@@ -57,6 +59,7 @@ symbol = " "
 symbol = " "
 
 [nodejs]
+format = "[$symbol($version)]($style)"
 symbol = " "
 
 [package]
@@ -84,6 +87,10 @@ symbol = " "
 
 [swift]
 symbol = "ﯣ "
+
+[status]
+disabled = false
+format = "[$status]($style)"
 
 [username]
 show_always = true

@@ -1,6 +1,9 @@
 [init]
-defaultBranch = main
+    defaultBranch = main
+
+[pull]
+    rebase = false
 
 [user]
-name = Darren Struthers
-email = dstruthers@gmail.com
+    name = Darren Struthers
+    email = dstruthers@gmail.com
