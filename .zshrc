@@ -10,15 +10,22 @@ bindkey -e
 autoload -Uz compinit
 compinit
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=black,bold"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+antigen bundle zsh-users/zsh-autosuggestions
 
 source ~/.antigen/bin/antigen.zsh
 antigen use oh-my-zsh
 [[ -n $commands[docker] ]] && antigen bundle docker
 [[ -n $commands[docker-compose] ]] && antigen bundle docker-compose
-antigen bundle zsh-users/zsh-autosuggestions
+
+if is-at-least 5.9 $ZSH_VERSION; then
+    source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+else
+    typeset -A ZSH_HIGHLIGHT_STYLES
+    ZSH_HIGHLIGHT_STYLES[comment]='fg=magenta'
+fi
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 
